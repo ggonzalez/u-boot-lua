@@ -3,12 +3,10 @@
 ** Lua stand-alone interpreter
 ** See Copyright Notice in lua.h
 */
-
-
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <asm-generic/signal.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
 
 #define lua_c
 
@@ -17,13 +15,9 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
-
-
 static lua_State *globalL = NULL;
 
 static const char *progname = LUA_PROGNAME;
-
-
 
 static void lstop (lua_State *L, lua_Debug *ar) {
   (void)ar;  /* unused arg. */
@@ -31,13 +25,11 @@ static void lstop (lua_State *L, lua_Debug *ar) {
   luaL_error(L, "interrupted!");
 }
 
-
 static void laction (int i) {
   signal(i, SIG_DFL); /* if another SIGINT happens before lstop,
                               terminate process (default action) */
   lua_sethook(globalL, lstop, LUA_MASKCALL | LUA_MASKRET | LUA_MASKCOUNT, 1);
 }
-
 
 static void print_usage (void) {
   fprintf(stderr,
@@ -53,7 +45,6 @@ static void print_usage (void) {
   progname);
   fflush(stderr);
 }
-
 
 static void l_message (const char *pname, const char *msg) {
   if (pname) fprintf(stderr, "%s: ", pname);
@@ -359,7 +350,7 @@ static int pmain (lua_State *L) {
 }
 
 
-int main (int argc, char **argv) {
+int lua_main (int argc, char **argv) {
   int status;
   struct Smain s;
   lua_State *L = lua_open();  /* create state */
