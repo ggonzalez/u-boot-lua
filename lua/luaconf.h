@@ -8,7 +8,7 @@
 #ifndef lconfig_h
 #define lconfig_h
 
-#include <limits.h>
+//#include <limits.h>
 #include <stddef.h>
 
 
@@ -33,10 +33,10 @@
 #define LUA_WIN
 #endif
 
+#define LUA_USE_READLINE	1 /* needs some extra libraries */
 #if defined(LUA_USE_LINUX)
 #define LUA_USE_POSIX
 #define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
-#define LUA_USE_READLINE	/* needs some extra libraries */
 #endif
 
 #if defined(LUA_USE_MACOSX)
@@ -259,9 +259,9 @@
 ** GNU readline and history facilities).
 */
 #if defined(LUA_USE_READLINE)
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+//#include <stdio.h>
+//#include <readline/readline.h>
+//#include <readline/history.h>
 #define lua_readline(L,b,p)	((void)L, ((b)=readline(p)) != NULL)
 #define lua_saveline(L,idx) \
 	if (lua_strlen(L,idx) > 0)  /* non-empty line? */ \

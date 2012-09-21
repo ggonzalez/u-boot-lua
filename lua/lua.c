@@ -8,7 +8,7 @@
 //#include <stdlib.h>
 //#include <string.h>
 
-#define lua_c
+#define lua_c 1
 
 #include "lua.h"
 
@@ -26,9 +26,12 @@ static void lstop (lua_State *L, lua_Debug *ar) {
 }
 
 static void laction (int i) {
+// Don't want signals for u-boot
+#if 0
   signal(i, SIG_DFL); /* if another SIGINT happens before lstop,
                               terminate process (default action) */
   lua_sethook(globalL, lstop, LUA_MASKCALL | LUA_MASKRET | LUA_MASKCOUNT, 1);
+#endif
 }
 
 static void print_usage (void) {
@@ -87,9 +90,10 @@ static int docall (lua_State *L, int narg, int clear) {
   int base = lua_gettop(L) - narg;  /* function index */
   lua_pushcfunction(L, traceback);  /* push traceback function */
   lua_insert(L, base);  /* put it under chunk and args */
-  signal(SIGINT, laction);
+  // No signal in u-boot
+  //signal(SIGINT, laction);
   status = lua_pcall(L, narg, (clear ? 0 : LUA_MULTRET), base);
-  signal(SIGINT, SIG_DFL);
+  //signal(SIGINT, SIG_DFL);
   lua_remove(L, base);  /* remove traceback function */
   /* force a complete garbage collection in case of errors */
   if (status != 0) lua_gc(L, LUA_GCCOLLECT, 0);
