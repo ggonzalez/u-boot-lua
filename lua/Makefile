@@ -30,6 +30,19 @@ COBJS-y := lua.o
 COBJS-y += lapi.o
 COBJS-y += ldo.o
 COBJS-y += lauxlib.o
+COBJS-y += ldebug.c
+COBJS-y += lfunc.c
+COBJS-y += lgc.c
+COBJS-y += lmem.c
+COBJS-y += lobject.c
+COBJS-y += lstate.c
+COBJS-y += lstring.c
+COBJS-y += ltable.c
+COBJS-y += ltm.c
+COBJS-y += lundump.c
+COBJS-y += lvm.c
+COBJS-y += lzio.c
+COBJS-y += lcode.c
 
 SRCS	:= $(AOBJS:.o=.S) $(COBJS-y:.o=.c)
 OBJS	:= $(addprefix $(obj),$(AOBJS) $(COBJS-y))
