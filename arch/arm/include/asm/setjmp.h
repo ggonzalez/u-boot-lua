@@ -7,7 +7,7 @@
  * v1 - v7, fp, ip, sp, lr
  */
 
-typedef int mp_buf[11];
+typedef int jmp_buf[11];
 
 extern int	setjmp(jmp_buf env);
 extern int	longjmp(jmp_buf env, int value);
