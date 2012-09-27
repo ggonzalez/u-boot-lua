@@ -43,6 +43,7 @@ COBJS-$(CONFIG_SYS_L2_PL310) += cache-pl310.o
 COBJS-y	+= interrupts.o
 COBJS-y	+= reset.o
 COBJS-y	+= setjmp.o
+COBJS-y	+= strlen.o
 SOBJS-$(CONFIG_USE_ARCH_MEMSET) += memset.o
 SOBJS-$(CONFIG_USE_ARCH_MEMCPY) += memcpy.o
 endif
