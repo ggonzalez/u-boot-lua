@@ -263,9 +263,7 @@
 //#include <readline/readline.h>
 //#include <readline/history.h>
 #define lua_readline(L,b,p)	((void)L, ((b)=readline(p)) != NULL)
-#define lua_saveline(L,idx) \
-	if (lua_strlen(L,idx) > 0)  /* non-empty line? */ \
-	  add_history(lua_tostring(L, idx));  /* add it to history */
+#define lua_saveline(L,idx)	((void)L)
 #define lua_freeline(L,b)	((void)L, free(b))
 #else
 #define lua_readline(L,b,p)	\

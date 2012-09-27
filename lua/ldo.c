@@ -7,7 +7,7 @@
 
 #include <asm/setjmp.h>
 //#include <stdlib.h>
-//#include <string.h>
+#include <linux/string.h>
 
 #define ldo_c
 #define LUA_CORE
@@ -103,7 +103,7 @@ void luaD_throw (lua_State *L, int errcode) {
       lua_unlock(L);
       G(L)->panic(L);
     }
-    exit(EXIT_FAILURE);
+    puts("We should somehow leave\n");
   }
 }
 
@@ -491,8 +491,13 @@ static void f_parser (lua_State *L, void *ud) {
   struct SParser *p = cast(struct SParser *, ud);
   int c = luaZ_lookahead(p->z);
   luaC_checkGC(L);
+#define U_BOOT_LUA 1
+#ifndef U_BOOT_LUA
   tf = ((c == LUA_SIGNATURE[0]) ? luaU_undump : luaY_parser)(L, p->z,
                                                              &p->buff, p->name);
+#else
+  tf = luaY_parser(L, p->z, &p->buff, p->name);
+#endif
   cl = luaF_newLclosure(L, tf->nups, hvalue(gt(L)));
   cl->l.p = tf;
   for (i = 0; i < tf->nups; i++)  /* initialize eventual upvalues */

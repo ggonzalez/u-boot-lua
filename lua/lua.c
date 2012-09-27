@@ -6,7 +6,7 @@
 #include <asm-generic/signal.h>
 //#include <stdio.h>
 //#include <stdlib.h>
-//#include <string.h>
+#include <linux/string.h>
 
 #define lua_c 1
 

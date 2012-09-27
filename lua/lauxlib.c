@@ -10,7 +10,7 @@
 #include <stdarg.h>
 //#include <stdio.h>
 //#include <stdlib.h>
-//#include <string.h>
+#include <linux/string.h>
 
 
 /* This file uses only the official API of Lua.
@@ -515,12 +515,15 @@ LUALIB_API void luaL_unref (lua_State *L, int t, int ref) {
 
 typedef struct LoadF {
   int extraline;
-  FILE *f;
+  int f;
   char buff[LUAL_BUFFERSIZE];
 } LoadF;
 
 
 static const char *getF (lua_State *L, void *ud, size_t *size) {
+	puts("We do not support this for now\n");
+#if 0
+  // We never reach the end of stdin
   LoadF *lf = (LoadF *)ud;
   (void)L;
   if (lf->extraline) {
@@ -531,6 +534,7 @@ static const char *getF (lua_State *L, void *ud, size_t *size) {
   if (feof(lf->f)) return NULL;
   *size = fread(lf->buff, 1, LUAL_BUFFERSIZE, lf->f);
   return (*size > 0) ? lf->buff : NULL;
+#endif
 }
 
 
@@ -544,6 +548,9 @@ static int errfile (lua_State *L, const char *what, int fnameindex) {
 
 
 LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
+puts("We do not support this for now\n");
+#if 0
+  // For now we do not support File IO
   LoadF lf;
   int status, readstatus;
   int c;
@@ -582,6 +589,7 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
   }
   lua_remove(L, fnameindex);
   return status;
+#endif
 }
 
 
@@ -631,7 +639,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
 }
 
 
-static int panic (lua_State *L) {
+static int _panic (lua_State *L) {
   (void)L;  /* to avoid warnings */
   fprintf(stderr, "PANIC: unprotected error in call to Lua API (%s)\n",
                    lua_tostring(L, -1));
@@ -641,7 +649,7 @@ static int panic (lua_State *L) {
 
 LUALIB_API lua_State *luaL_newstate (void) {
   lua_State *L = lua_newstate(l_alloc, NULL);
-  if (L) lua_atpanic(L, &panic);
+  if (L) lua_atpanic(L, &_panic);
   return L;
 }
 

@@ -19,7 +19,7 @@
 */
 
 //#include <math.h>
-//#include <string.h>
+#include <linux/string.h>
 
 #define ltable_c
 #define LUA_CORE

@@ -5,7 +5,7 @@
 */
 
 
-//#include <string.h>
+#include <linux/string.h>
 
 #define lstring_c
 #define LUA_CORE
