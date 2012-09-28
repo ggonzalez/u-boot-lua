@@ -16,6 +16,8 @@ extern char * strchr(const char * s, int c);
 
 #define __HAVE_ARCH_STRLEN	1
 extern int strlen(const char *);
+#define __HAVE_ARCH_STRCHR	1
+extern char *strchr(const char *, int);
 
 #ifdef CONFIG_USE_ARCH_MEMCPY
 #define __HAVE_ARCH_MEMCPY
