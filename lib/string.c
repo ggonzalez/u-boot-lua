@@ -20,7 +20,6 @@
 #include <linux/ctype.h>
 #include <malloc.h>
 
-
 #if 0 /* not used - was: #ifndef __HAVE_ARCH_STRNICMP */
 /**
  * strnicmp - Case insensitive, length-limited string comparison
@@ -649,6 +648,7 @@ void *memchr(const void *s, int c, size_t n)
 
 #endif
 
+#ifndef __HAVE_ARCH_STRCSPN
 /*
  * Import from newlib
  */
@@ -672,3 +672,4 @@ strcspn(const char *s1, const char *s2)
 
   return s1 - s;
 }
+#endif

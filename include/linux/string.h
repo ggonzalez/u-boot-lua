@@ -88,6 +88,9 @@ extern void * memchr(const void *,int,__kernel_size_t);
 #ifndef __HAVE_ARCH_STRCSPN
 extern int strcspn(const char *,const char *);
 #endif
+#ifndef __HAVE_ARCH_STRTOD
+extern double strtod(const char *restrict, char **restrict2);
+#endif
 
 #ifdef __cplusplus
 }

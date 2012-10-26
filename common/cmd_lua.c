@@ -7,7 +7,10 @@
 
 int do_lua(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
-	printf("yea\n");
+	printf("Launching LUA: \n");
+	lua_main(0, NULL);
+	printf("done\n");
+	
 	return 0;
 }
 

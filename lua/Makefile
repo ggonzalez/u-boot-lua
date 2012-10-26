@@ -47,6 +47,7 @@ COBJS-y += llex.o
 COBJS-y += lopcodes.o
 COBJS-y += lparser.o
 COBJS-y += linit.o
+COBJS-y += lbaselib.o
 
 SRCS	:= $(AOBJS:.o=.S) $(COBJS-y:.o=.c)
 OBJS	:= $(addprefix $(obj),$(AOBJS) $(COBJS-y))

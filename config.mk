@@ -53,14 +53,14 @@ endif
 
 # clean the slate ...
 PLATFORM_RELFLAGS =
-PLATFORM_CPPFLAGS =
+PLATFORM_CPPFLAGS = -ggdb
 PLATFORM_LDFLAGS =
 
 #########################################################################
 
 HOSTCFLAGS	= -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer \
 		  $(HOSTCPPFLAGS)
-HOSTSTRIP	= strip
+HOSTSTRIP	= #strip
 
 #
 # Mac OS X / Darwin's C preprocessor is Apple specific.  It
