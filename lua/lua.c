@@ -330,26 +330,32 @@ static int pmain (lua_State *L) {
   s->status = handle_luainit(L);
   if (s->status != 0) return 0;
   script = collectargs(argv, &has_i, &has_v, &has_e);
+#if 0
   if (script < 0) {  /* invalid args? */
     print_usage();
     s->status = 1;
     return 0;
   }
   if (has_v) print_version();
+#endif
   s->status = runargs(L, argv, (script > 0) ? script : s->argc);
   if (s->status != 0) return 0;
+#if 0
   if (script)
     s->status = handle_script(L, argv, script);
   if (s->status != 0) return 0;
   if (has_i)
     dotty(L);
   else if (script == 0 && !has_e && !has_v) {
+#endif
     if (lua_stdin_is_tty()) {
       print_version();
       dotty(L);
     }
+#if 0
     else dofile(L, NULL);  /* executes stdin as a file */
   }
+#endif
   return 0;
 }
 
